@@ -21,11 +21,15 @@
             </div>
         </div>
         <div class="house-info">
-            <img src="/static/images/home01.jpg">
-            <div class="house-text">
-                <h3>房屋标题</h3>
-                <p>￥<span>300</span>/晚</p>
-            </div>
+            {% raw %}
+            <script type="text/html" id="house_booking_script">
+                <img src="/static/media/{{ ohouse.index_image_url }}">
+                <div class="house-text">
+                    <h3>{{ ohouse.title }}</h3>
+                    <p>￥<span>{{ ohouse.price }}</span>/晚</p>
+                </div>
+                </script>
+            {% endraw %}
         </div>
         <div class="select-date">
             <div class="select-date-header">入住时间</div>
@@ -52,5 +56,6 @@
     <script src="/static/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="/static/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
     <script src="/static/js/ihome/booking.js"></script>
+    <script src="/static/js/template.js"></script>
 </body>
 </html>

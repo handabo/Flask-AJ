@@ -22,3 +22,12 @@ $(document).ready(function(){
         $(".modal-comment").attr("order-id", orderId);
     });
 });
+
+$.get('/order/my_orders/', function(data){
+    if(data.code == '200'){
+        var order_html_script = template('orders-list-tmpl', {orders:data.orders_list})
+        $('.orders-list').html(order_html_script)
+    }
+})
+
+

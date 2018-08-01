@@ -3,8 +3,9 @@ from flask import Flask
 from flask_session import Session
 from flask_debugtoolbar import DebugToolbarExtension
 
-from app.house_view import house_blueprint
 from app.user_views import user_blueprint
+from app.order_view import order_blueprint
+from app.house_view import house_blueprint
 from app.models import db
 from utils.functions import get_sqlalchemy_uri
 
@@ -18,7 +19,7 @@ def create_app():
     # 创建总路由
     app.register_blueprint(user_blueprint, url_prefix='/user')
     app.register_blueprint(house_blueprint, url_prefix='/house')
-    app.register_blueprint(house_blueprint, url_prefix='/order')
+    app.register_blueprint(order_blueprint, url_prefix='/order')
 
     # 配置数据库
     app.config['SQLALCHEMY_DATABASE_URI'] = get_sqlalchemy_uri(MYSQL_DATABASE)

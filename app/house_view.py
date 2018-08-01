@@ -110,6 +110,7 @@ def house_detail():
     return render_template('detail.html')
 
 
+# 展示房间详细信息
 @house_blueprint.route('/house_detail/<int:id>/', methods=['GET'])
 def houses_detail(id):
     house = House.query.get(id)

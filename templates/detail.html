@@ -41,11 +41,11 @@
         <div class="detail-con">
             <div class="detail-header layout-style">
                 <h2 class="house-title">{{ ohouse.title }}</h2>
-                <div class="landlord-pic"><img src="/static/media/{{ image }}"></div>
-                <h2 class="landlord-name">房东： <span>房东姓名</span></h2>
+                <div class="landlord-pic"><img src="/static/media/{{ ohouse.user_avatar }}"></div>
+                <h2 class="landlord-name">房东： <span>{{ ohouse.user_name }}</span></h2>
             </div>
             <div class="house-info layout-style">
-               <h3>所在地址</h3>
+               <h3>房屋地址</h3>
                <ul class="house-info-list text-center">
                     <li>{{ ohouse.address }}</li>
                </ul>
@@ -84,29 +84,9 @@
             <div class="house-facility layout-style">
                 <h3>配套设施</h3>
                 <ul class="house-facility-list clearfix">
-                    <li><span class="wirelessnetwork-ico"></span>无线网络</li>
-                    <li><span class="shower-ico"></span>热水淋浴</li>
-                    <li><span class="aircondition-ico"></span>空调</li>
-                    <li><span class="heater-ico"></span>暖气</li>
-                    <li><span class="smoke-ico"></span>允许吸烟</li>
-                    <li><span class="drinking-ico"></span>饮水设备</li>
-                    <li><span class="brush-ico"></span>牙具</li>
-                    <li><span class="soap-ico"></span>香皂</li>
-                    <li><span class="slippers-ico"></span>拖鞋</li>
-                    <li><span class="toiletpaper-ico"></span>手纸</li>
-                    <li><span class="towel-ico"></span>毛巾</li>
-                    <li><span class="toiletries-ico"></span>沐浴露、洗发露</li>
-                    <li><span class="icebox-ico"></span>冰箱</li>
-                    <li><span class="washer-ico"></span>洗衣机</li>
-                    <li><span class="elevator-ico"></span>电梯</li>
-                    <li><span class="iscook-ico"></span>允许做饭</li>
-                    <li><span class="pet-ico"></span>允许带宠物</li>
-                    <li><span class="meet-ico"></span>允许聚会</li>
-                    <li><span class="accesssys-ico"></span>门禁系统</li>
-                    <li><span class="parkingspace-ico"></span>停车位</li>
-                    <li><span class="wirednetwork-ico"></span>有线网络</li>
-                    <li><span class="tv-ico"></span>电视</li>
-                    <li><span class="jinzhi-ico"></span>浴缸</li>
+                    {{ each ohouse.facilities as facility }}
+                    <li><span class="{{ facility.css }}"></span>{{ facility.name }}</li>
+                    {{ /each }}
                 </ul>
             </div> 
             <div class="house-info layout-style">
@@ -119,7 +99,7 @@
                 </ul>
             </div>
         </div>
-        <a class="book-house" href="">即刻预定</a>
+        <a class="book-house" href="/order/booking/?house_id={{ ohouse.id }}">即刻预定</a>
         </script>
         {% endraw %}
 

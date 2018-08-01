@@ -46,4 +46,37 @@ $(document).ready(function(){
             $(".order-amount>span").html(amount.toFixed(2) + "(共"+ days +"晚)");
         }
     });
-})
+
+    // 获取预定页面房屋信息
+    var url = location.search
+    var house_id = url.split('=')[1]
+    $.get('/house/house_detail/' + house_id + '/',function(data){
+        var house_booking_detail = template('house_booking_script', {ohouse: data.house})
+        $('.house-info').html(house_booking_detail)
+    });
+
+    // 获取预定时间和房间总价
+    $('.submit-btn').click(function(){
+        var begin_date = $('#start-date').val()
+        var end_date = $('#end-date').val()
+        data = {'house_id': house_id, 'begin_date':begin_date, 'end_date': end_date}
+        $.post('/order/order/', data, function(data){
+            location.href='/order/orders/'
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
