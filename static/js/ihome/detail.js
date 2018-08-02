@@ -20,6 +20,7 @@ $(document).ready(function(){
 
         var house_detail = template('house_detail_script', {ohouse:data.house})
         $('.container').append(house_detail)
+
         var mySwiper = new Swiper ('.swiper-container', {
         loop: true,
         autoplay: 2000,

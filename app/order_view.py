@@ -47,9 +47,44 @@ def m_orders():
 # 获取订单详情信息
 @order_blueprint.route('/my_orders/', methods=['GET'])
 def my_orders():
-    orders = Order.query.filter(Order.user_id==session['user_id'])
+    orders = Order.query.filter(Order.user_id == session['user_id'])
     orders_list = [order.to_dict() for order in orders]
     return jsonify(code=status_code.OK, orders_list=orders_list)
+
+
+# 进入客户订单页面
+@order_blueprint.route('/lorders/', methods=['GET'])
+def lorders():
+    return render_template('lorders.html')
+
+
+# 获取客户订单详细信息
+@order_blueprint.route('/my_lorders/', methods=['GET'])
+def my_lorders():
+    user_id = session['user_id']
+    houses = House.query.filter(House.user_id == user_id)
+    houses_ids = [house.id for house in houses]
+
+    orders = Order.query.filter(Order.house_id.in_(houses_ids))
+    orders_list = [order.to_dict() for order in orders]
+    return jsonify(code=status_code.OK, orders_list=orders_list)
+
+
+# 修改订单状态
+@order_blueprint.route('/order/', methods=['PATCH'])
+def order_status():
+    order_id = request.form.get('order_id')
+    status = request.form.get('status')
+    comment = request.form.get('comment')
+
+    order = Order.query.get(order_id)
+    order.status = status
+    if comment:
+        order.comment = comment
+    order.add_update()
+
+    return jsonify(status_code.SUCCESS)
+
 
 
 
